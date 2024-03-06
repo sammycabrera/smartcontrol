@@ -1,10 +1,19 @@
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
+  background-color: #20343e;
+  background-image: url("/img/thinger_io_platform.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 800px;
+}
+
+.title_page {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  left: 200px;
 }
 
 .description {
