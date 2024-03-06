@@ -123,8 +123,10 @@ export default function Locations({ list_locations }) {
         {locations.map((location) => {
           return (
             <div className={styles.row_header} key={"idh" + index}>
-              <div className={styles.cell_header}>{location.id}</div>
-              <div className={styles.cell_header}>
+              <div key={"idr" + index} className={styles.cell_header}>
+                {location.id}
+              </div>
+              <div key={"idhc" + index} className={styles.cell_header}>
                 <EditableText
                   value={location.name_location}
                   onChange={(value) =>
