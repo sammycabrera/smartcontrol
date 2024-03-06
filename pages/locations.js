@@ -114,7 +114,7 @@ export default function Locations({ list_locations }) {
       <Sidemenu />
       <div className={styles.title_page}>GHC IoT Platform</div>
       <div className={styles.body_table}>
-        <div className={styles.row_header}>
+        <div className={styles.row_header} key={"idh2"}>
           <div className={styles.cell_header}>Id</div>
           <div className={styles.cell_header}>Name Location</div>
           <div className={styles.cell_header}>User Id</div>
@@ -122,7 +122,7 @@ export default function Locations({ list_locations }) {
         </div>
         {locations.map((location) => {
           return (
-            <div className={styles.row_header}>
+            <div className={styles.row_header} key={"idh" + index}>
               <div className={styles.cell_header}>{location.id}</div>
               <div className={styles.cell_header}>
                 <EditableText
@@ -163,7 +163,7 @@ export default function Locations({ list_locations }) {
             </div>
           );
         })}
-        <div className={styles.row_header}>
+        <div className={styles.row_header} key={"idhdb1"}>
           <div className={styles.cell_header}></div>
           <div className={styles.cell_header}>
             <input
