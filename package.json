@@ -19,7 +19,8 @@
     "react-icons": "^5.0.1",
     "react-loading": "^2.0.3",
     "react-native-button": "^3.1.0",
-    "react-native-really-awesome-button": "^2.0.4"
+    "react-native-really-awesome-button": "^2.0.4",
+    "recharts": "^2.12.2"
   },
   "devDependencies": {
     "eslint": "^8",
