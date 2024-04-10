@@ -20,9 +20,18 @@ export default function Sidemenu() {
         className={styles.icon}
         onClick={() => router.push({ pathname: "/locations" })}
       />
-      <FaPrint className={styles.icon} />
-      <VscGraph className={styles.icon} />
-      <TbChartInfographic className={styles.icon} />
+      <FaPrint
+        className={styles.icon}
+        onClick={() => router.push({ pathname: "/devices" })}
+      />
+      <VscGraph
+        className={styles.icon}
+        onClick={() => router.push({ pathname: "/graphrtpage" })}
+      />
+      <TbChartInfographic
+        className={styles.icon}
+        onClick={() => router.push({ pathname: "/graphpage" })}
+      />
     </div>
   );
 }

@@ -13,3 +13,11 @@
   margin-right: 10px;
   margin-left: 10px;
 }
+
+.title_page {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  left: 200px;
+}

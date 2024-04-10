@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../styles/locations.module.css";
+import styles from "../styles/devices.module.css";
 import Header from "../components/header/header";
 import Sidemenu from "../components/Sidemenu/sidemenu";
 import { MdDelete } from "react-icons/md";
@@ -17,91 +17,97 @@ import { CiEdit } from "react-icons/ci";
 
 <ReactLoading type={"spin"} color={"black"} height={20} width={20} />;
 
-export default function Locations({ list_locations }) {
-  console.log(list_locations);
+export default function Devices({ list_devices }) {
+  console.log(list_devices);
 
-  const [name_location, setNameLocation] = useState("");
-  const [user_id, setUserId] = useState("");
+  const [name_device, setNamedevice] = useState("");
+  const [location_id, setLocationId] = useState("");
+  const [unidad, setUnidad] = useState("");
 
   const [load, setLoad] = useState(false);
 
-  const [locations, setLocations] = useState(list_locations.locations);
+  const [devices, setdevices] = useState(list_devices.devices);
 
-  const create_location = async () => {
+  const create_device = async () => {
     setLoad(true);
     const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "api/location/",
+      process.env.NEXT_PUBLIC_API_URL + "api/device/",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name_location: name_location,
-          user_id: user_id,
+          name_device: name_device,
+          unidad: unidad,
+          location_id: location_id,
         }),
       }
     );
     if (response.status === 200) {
       setLoad(false);
-      setNameLocation("");
-      setUserId("");
-      const list_locations = await get_locations();
-      setLocations(list_locations.locations);
+      setNamedevice("");
+      setLocationId("");
+      setUnidad("");
+      const list_devices = await get_devices();
+      setdevices(list_devices.devices);
     }
   };
 
-  const update_location = async (idLoc, name_loc) => {
+  const update_device = async (idDev, name_dev, loc_id) => {
     setLoad(true);
     const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + `api/location/${idLoc}` + "/",
+      process.env.NEXT_PUBLIC_API_URL + `api/device/${idDev}` + "/",
       {
         method: "PUT",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
         body: JSON.stringify({
-          name_location: name_loc,
+          name_device: name_dev,
+          location_id: loc_id,
         }),
       }
     );
     if (response.status === 200) {
       setLoad(false);
-      setNameLocation("");
-      setUserId("");
-      const list_locations = await get_locations();
-      setLocations(list_locations.locations);
+      setNamedevice("");
+      setLocationId("");
+      setUnidad("");
+      const list_devices = await get_devices();
+      setdevices(list_devices.devices);
     }
   };
 
-  const get_locations = async () => {
+  const get_devices = async () => {
     const apiresponse = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "api/location/1/"
+      process.env.NEXT_PUBLIC_API_URL + "api/device/all/"
     );
-    const list_locations = await apiresponse.json();
-    console.log("Es de tipo " + typeof list_locations);
-    return list_locations;
+    const list_devices = await apiresponse.json();
+    console.log("Es de tipo " + typeof list_devices);
+    return list_devices;
   };
 
-  const delete_location = async (id) => {
+  const delete_device = async (id) => {
     setLoad(true);
     const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + `api/location/${id}` + "/",
+      process.env.NEXT_PUBLIC_API_URL + `api/device/${id}` + "/",
       {
         method: "DELETE",
       }
     );
     if (response.status === 200) {
       setLoad(false);
-      setNameLocation("");
-      setUserId("");
-      const list_locations = await get_locations();
-      setLocations(list_locations.locations);
+      setNamedevice("");
+      setLocationId("");
+      setUnidad("");
+      const list_devices = await get_devices();
+      setdevices(list_devices.devices);
     }
   };
 
   const onChangeHandler = (id, key, value) => {
-    setLocations((values) => {
+    setdevices((values) => {
       return values.map((item) =>
         item.id === id ? { ...item, [key]: value } : item
       );
@@ -115,23 +121,25 @@ export default function Locations({ list_locations }) {
       <div className={styles.body_table}>
         <div className={styles.row_header} key={"idh2"}>
           <div className={styles.cell_header}>Id</div>
-          <div className={styles.cell_header}>Name Location</div>
-          <div className={styles.cell_header}>User Id</div>
+          <div className={styles.cell_header}>Name device</div>
+          <div className={styles.cell_header}>Unidad</div>
+          <div className={styles.cell_header}>Location</div>
           <div className={styles.cell_header}>Eliminar</div>
         </div>
-        {locations.map((location) => {
+        {devices.map((device) => {
           return (
-            <div className={styles.row_header} key={"idh" + location.id}>
-              <div className={styles.cell_header}>{location.id}</div>
+            <div className={styles.row_header} key={"idh" + device.id}>
+              <div className={styles.cell_header}>{device.id}</div>
               <div className={styles.cell_header}>
                 <EditableText
-                  value={location.name_location}
+                  value={device.name_device}
                   onChange={(value) =>
-                    onChangeHandler(location.id, "name_location", value)
+                    onChangeHandler(device.id, "name_device", value)
                   }
                 />
               </div>
-              <div className={styles.cell_header}>{location.user_id}</div>
+              <div className={styles.cell_header}>{device.unidad}</div>
+              <div className={styles.cell_header}>{device.location_id}</div>
               <div className={styles.cell_header}>
                 {load ? (
                   <ReactLoading
@@ -143,7 +151,11 @@ export default function Locations({ list_locations }) {
                 ) : (
                   <CiEdit
                     onClick={() =>
-                      update_location(location.id, location.name_location)
+                      update_device(
+                        device.id,
+                        device.name_device,
+                        device.location_id
+                      )
                     }
                   />
                 )}
@@ -156,7 +168,7 @@ export default function Locations({ list_locations }) {
                     width={20}
                   />
                 ) : (
-                  <MdDelete onClick={() => delete_location(location.id)} />
+                  <MdDelete onClick={() => delete_device(device.id)} />
                 )}
               </div>
             </div>
@@ -166,14 +178,20 @@ export default function Locations({ list_locations }) {
           <div className={styles.cell_header}></div>
           <div className={styles.cell_header}>
             <input
-              value={name_location}
-              onChange={(event) => setNameLocation(event.target.value)}
+              value={name_device}
+              onChange={(event) => setNamedevice(event.target.value)}
             ></input>
           </div>
           <div className={styles.cell_header}>
             <input
-              value={user_id}
-              onChange={(event) => setUserId(event.target.value)}
+              value={unidad}
+              onChange={(event) => setUnidad(event.target.value)}
+            ></input>
+          </div>
+          <div className={styles.cell_header}>
+            <input
+              value={location_id}
+              onChange={(event) => setLocationId(event.target.value)}
             ></input>
           </div>
           <div className={styles.cell_header}>
@@ -185,7 +203,7 @@ export default function Locations({ list_locations }) {
                 width={20}
               />
             ) : (
-              <IoMdAddCircle onClick={() => create_location()}></IoMdAddCircle>
+              <IoMdAddCircle onClick={() => create_device()}></IoMdAddCircle>
             )}
           </div>
         </div>
@@ -196,13 +214,13 @@ export default function Locations({ list_locations }) {
 
 export const getServerSideProps = async () => {
   const apiresponse = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "api/location/1/"
+    process.env.NEXT_PUBLIC_API_URL + "api/device/all/"
   );
 
-  const list_locations = await apiresponse.json();
+  const list_devices = await apiresponse.json();
   return {
     props: {
-      list_locations,
+      list_devices,
     },
   };
 };

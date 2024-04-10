@@ -1,0 +1,20 @@
+.main {
+  width: 200px;
+  height: 100px;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  color: blanchedalmond;
+  font-size: 50px;
+}
+
+.data {
+  color: #fff;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}

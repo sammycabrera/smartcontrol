@@ -1,12 +1,11 @@
 import React from "react";
-import { getDataSimpleChart } from "../rtgraph/fetchdatagh";
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
-export default function Graph({ data }) {
+export default function RTGraph({ data }) {
   return (
     <LineChart
-      width={500}
+      width={800}
       height={300}
       data={data}
       margin={{
@@ -17,7 +16,7 @@ export default function Graph({ data }) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="id" />
+      <XAxis dataKey="id" type="number" domain={[0, 100]} />
       <YAxis />
 
       <Line

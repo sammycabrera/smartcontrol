@@ -1,0 +1,46 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  background-color: #20343e;
+}
+
+.title_page {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 15px;
+  left: 200px;
+}
+
+.body_table {
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  width: 1200px;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+  border: 5px solid rgb(224, 205, 205);
+  overflow-y: scroll;
+}
+
+.row_header {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(202, 195, 195);
+  display: flex;
+  flex-direction: row;
+}
+
+.cell_header {
+  width: 25%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  /*background-color: red;*/
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
